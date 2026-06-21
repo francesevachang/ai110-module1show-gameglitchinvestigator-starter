@@ -14,6 +14,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
   * In the Developer Debug Info section, the number of attempts starts with 1 although I have not started guessing (I believe it should start with 0).
   * The history of the last guess is recorded only when I submit the next guess. The same applied for the update of the number of attempts.
   * When I start a new game, the history and score are not reset (while attempts is set to 0), and the page is showing "Game over. Start a new game to try again."
+  * Logic of updating the score is unclear to me.
 
 **Bug Reproduction Log**
 
