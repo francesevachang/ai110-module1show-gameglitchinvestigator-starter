@@ -32,6 +32,13 @@ def parse_guess(raw: str):
     return True, value, None
 
 
+HINT_MESSAGES = {
+    "Win": "🎉 Correct!",
+    "Too High": "📉 Go LOWER!",
+    "Too Low": "📈 Go HIGHER!",
+}
+
+
 def check_guess(guess, secret):
     """
     Compare guess to secret and return the outcome.

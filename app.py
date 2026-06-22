@@ -6,13 +6,8 @@ from logic_utils import (
     parse_guess,
     check_guess,
     update_score,
+    HINT_MESSAGES,
 )
-
-HINT_MESSAGES = {
-    "Win": "🎉 Correct!",
-    "Too High": "📉 Go LOWER!",
-    "Too Low": "📈 Go HIGHER!",
-}
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
