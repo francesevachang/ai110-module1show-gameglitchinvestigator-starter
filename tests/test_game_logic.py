@@ -1,5 +1,6 @@
 from logic_utils import check_guess, update_score, HINT_MESSAGES
 
+# FIX: added more tests to check for bugs in the game logic in agent mode
 def test_winning_guess():
     # If the secret is 50 and guess is 50, it should be a win
     result = check_guess(50, 50)

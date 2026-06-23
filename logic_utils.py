@@ -1,3 +1,5 @@
+# FIX: Refactored logic into logic_utils.py using agent mode
+
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
@@ -38,7 +40,7 @@ HINT_MESSAGES = {
     "Too Low": "📈 Go HIGHER!",
 }
 
-
+# FIX: fixed returned value of check_guess in agent mode so tests work properly
 def check_guess(guess, secret):
     """
     Compare guess to secret and return the outcome.
@@ -53,7 +55,7 @@ def check_guess(guess, secret):
 
     return "Too Low"
 
-
+# FIX: made the score penalty consistent for wrong guesses regardless if the guess is too high or too low
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""
     if outcome == "Win":

@@ -1,6 +1,7 @@
 import random
 import streamlit as st
 
+#FIX: Refactored logic into logic_utils.py using agent mode
 from logic_utils import (
     get_range_for_difficulty,
     parse_guess,
@@ -37,6 +38,7 @@ st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
+# FIX: set the initial attempt number to 0 in agent mode
 if "attempts" not in st.session_state:
     st.session_state.attempts = 0
 
@@ -100,6 +102,7 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
+        #FIX: fixed returned value of check_guess in agent mode so tests work properly
         outcome = check_guess(guess_int, st.session_state.secret)
         message = HINT_MESSAGES[outcome]
 
