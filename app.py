@@ -17,10 +17,19 @@ st.caption("An AI-generated guessing game. Something is off.")
 
 st.sidebar.header("Settings")
 
+# A game is "in progress" once a guess has been made and it is still playable.
+# Lock the difficulty selector while in progress so the secret can't be left
+# out of range by switching difficulty mid-game.
+game_in_progress = (
+    st.session_state.get("status", "playing") == "playing"
+    and st.session_state.get("attempts", 0) > 0
+)
+
 difficulty = st.sidebar.selectbox(
     "Difficulty",
     ["Easy", "Normal", "Hard"],
     index=1,
+    disabled=game_in_progress,
 )
 
 # FIX: Adjusted the number of allowed attempts so higher difficulty level has less allowed attempts
@@ -36,8 +45,13 @@ low, high = get_range_for_difficulty(difficulty)
 st.sidebar.caption(f"Range: {low} to {high}")
 st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 
-if "secret" not in st.session_state:
-    st.session_state.secret = random.randint(low, high)
+# (Re)generate the secret when it is missing or the difficulty changed, but only
+# when no game is in progress. This keeps the secret in range if the player
+# switches difficulty before making their first guess.
+if "secret" not in st.session_state or st.session_state.get("active_difficulty") != difficulty:
+    if not game_in_progress:
+        st.session_state.secret = random.randint(low, high)
+        st.session_state.active_difficulty = difficulty
 
 # FIX: set the initial attempt number to 0 in agent mode
 if "attempts" not in st.session_state:
@@ -82,6 +96,7 @@ with col3:
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(low, high)
+    st.session_state.active_difficulty = difficulty
     st.session_state.score = 0
     st.session_state.status = "playing"
     st.session_state.history = []
