@@ -1,5 +1,6 @@
 # FIX: Refactored logic into logic_utils.py using agent mode
 
+# FIX: Adjusted the number ranges so more difficult level actually have larger number range to choose from
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
@@ -7,7 +8,7 @@ def get_range_for_difficulty(difficulty: str):
     if difficulty == "Normal":
         return 1, 100
     if difficulty == "Hard":
-        return 1, 50
+        return 1, 150
     return 1, 100
 
 
