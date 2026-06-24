@@ -33,14 +33,15 @@ Document at least 3 bugs you found. Add rows as needed.
 ## 2. How did you use AI as a teammate?
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
-I used Claude Code.
+
+  I used Claude Code.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 
-Claude Code suggested that the hint messages in the `check_guess` function were flipped for result "Too High" and "Too Low", and that they should be swapped. It later suggested to factor out the hint messages from `check_guess`'s returned value because the unit tests only accept a value -- the outcome. These were both correct, and I verified these using my own knowledge/judgement from looking at the code, as well as writing and running new unit tests and actually playing the game.
+  Claude Code suggested that the hint messages in the `check_guess` function were flipped for result "Too High" and "Too Low", and that they should be swapped. It later suggested to factor out the hint messages from `check_guess`'s returned value because the unit tests only accept a value -- the outcome. These were both correct, and I verified these using my own knowledge/judgement from looking at the code, as well as writing and running new unit tests and actually playing the game.
 
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
-In this activity, I tried to be specific on describing my needs and the discrepencies between the expected behaviors and the actual behaviors of the program, and Claude Code did pretty well in suggesting potential bugs and their fixes and I found most of its advice helpful, so there was not really something incorrect or misleading during the process. However, I do want to note that based on reading the codebase, I found that sometimes Claude Code would make assumptions on the game's behaviors or rules that might not be intended. For example, it made assumptions on how the scores are calculated even though neither I nor the documentation specified those. Therefore, it is best to always be wary about the assumptions (that are potentially wrong) AI is making and be more specific about expected behaviors / rules / assumptions while prompting the agent.
+  In this activity, I tried to be specific on describing my needs and the discrepencies between the expected behaviors and the actual behaviors of the program, and Claude Code did pretty well in suggesting potential bugs and their fixes and I found most of its advice helpful, so there was not really something incorrect or misleading during the process. However, I do want to note that based on reading the codebase, I found that sometimes Claude Code would make assumptions on the game's behaviors or rules that might not be intended. For example, it made assumptions on how the scores are calculated even though neither I nor the documentation specified those. Therefore, it is best to always be wary about the assumptions (that are potentially wrong) AI is making and be more specific about expected behaviors / rules / assumptions while prompting the agent.
 
 ---
 
@@ -48,16 +49,16 @@ In this activity, I tried to be specific on describing my needs and the discrepe
 
 - How did you decide whether a bug was really fixed?
 
-I decide whether a bug was really fixed by: 1. reading the code and making judgements based on logic 2. writing new unit tests that tackle that specific bug and see if they pass after the fix 3. actually playing the game to see if it performs expectedly
+  I decide whether a bug was really fixed by: 1. reading the code and making judgements based on logic 2. writing new unit tests that tackle that specific bug and see if they pass after the fix 3. actually playing the game to see if it performs expectedly
 
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
 
-By running the first three test cases and also observing the game's behavior in an actual game, I know the original bug of misleading hints is fixed, and the user can now use the hint to approach the correct answer.
+  By running the first three test cases and also observing the game's behavior in an actual game, I know the original bug of misleading hints is fixed, and the user can now use the hint to approach the correct answer.
 
 - Did AI help you design or understand any tests? How?
 
-Yes. Claude Code helps design the last four test cases 1. to see if the outcome matches the corresponding hint, 2. to check if the wrong casting problem is solved by comparing two numerical values in two scenarios (> and <), 3. to see if wrong guesses always result in the same penalty regardless of whether the number of attempts is even or odd and whether the guess is too high or too low.
+  Yes. Claude Code helps design the last four test cases 1. to see if the outcome matches the corresponding hint, 2. to check if the wrong casting problem is solved by comparing two numerical values in two scenarios (> and <), 3. to see if wrong guesses always result in the same penalty regardless of whether the number of attempts is even or odd and whether the guess is too high or too low.
 
 ---
 
@@ -65,11 +66,27 @@ Yes. Claude Code helps design the last four test cases 1. to see if the outcome 
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
+  Streamlit reruns: 
+
+  Everytime we touch anything / interacts with the elements in the UI, the entire script reruns to build a fresh page.
+
+  Session state: 
+
+  This saves things you want to maintain across reruns. For example, if the secret number is not saved as a state, then every time we interacts with the elements on the UI, the secret number gets changed and the game is not winnable. Now, we make it a session state, so the secret number stays fixed even if we rerun the entire script.
+
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+
+  I would keep the habit of verifying the changes suggested by AI manually (for each filed touched by the AI).
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+
+  I would try to separate different topics / concerns into different windows while discussing with AI to reduce confusion.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+  While sometimes AI asks for clarifications, a lot of times, if you are too lazy and do not specify what you want in enough details, it would make assumptions for you that may not be what you intend.
